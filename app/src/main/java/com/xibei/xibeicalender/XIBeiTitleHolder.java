@@ -19,8 +19,7 @@ public class XIBeiTitleHolder extends RecyclerView.ViewHolder {
         if (title.isTitle){
             tv_calender_title
                     .setText(title.calendar.get(Calendar.YEAR)+"-"
-                            +title.calendar.get(Calendar.MONTH)+"-"
-                            +title.calendar.get(Calendar.DAY_OF_MONTH));
+                            +(title.calendar.get(Calendar.MONTH)+1));
         }
     }
 }

@@ -1,11 +1,14 @@
 package com.xibei.xibeicalender;
 
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
 import java.util.Calendar;
+
+import static com.xibei.xibeicalender.R.drawable.item_bg;
 
 public class XiBeiCalenderHolder extends RecyclerView.ViewHolder {
 
@@ -20,6 +23,10 @@ public class XiBeiCalenderHolder extends RecyclerView.ViewHolder {
             if (!item.isTitle) {
                 if (item.calendar != null) {
                     tv_calender_item.setText(item.calendar.get(Calendar.DAY_OF_MONTH) + "");
+                    if (item.isToday){
+                        tv_calender_item.setTextColor(Color.WHITE);
+                        tv_calender_item.setBackgroundResource(R.drawable.item_bg);
+                    }
                 } else {
                     tv_calender_item.setText("");
                 }

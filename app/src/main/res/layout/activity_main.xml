@@ -15,14 +15,14 @@
             android:id="@+id/ic_sun"
             android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
+            android:layout_height="60dp"/>
 
         <include
             layout="@layout/item_calender"
             android:id="@+id/ic_mon"
             android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
+            android:layout_height="60dp"/>
 
 
         <include
@@ -30,35 +30,35 @@
             android:id="@+id/ic_tue"
             android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
+            android:layout_height="60dp"/>
 
         <include
             layout="@layout/item_calender"
             android:id="@+id/ic_wen"
             android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
+            android:layout_height="60dp"/>
 
         <include
             layout="@layout/item_calender"
             android:id="@+id/ic_thu"
             android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
+            android:layout_height="60dp"/>
 
         <include
             layout="@layout/item_calender"
             android:id="@+id/ic_fri"
             android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
+            android:layout_height="60dp"/>
 
         <include
             layout="@layout/item_calender"
             android:id="@+id/ic_sat"
             android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
+            android:layout_height="60dp"/>
 
     </LinearLayout>
 
