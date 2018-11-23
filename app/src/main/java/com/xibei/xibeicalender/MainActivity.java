@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private List<ItemBean> dataList = new ArrayList<>();
     private int year, month, day;
     private Calendar nowCalender = Calendar.getInstance();
+    private Calendar inComeCalender = Calendar.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +40,10 @@ public class MainActivity extends AppCompatActivity {
         ((TextView) findViewById(R.id.ic_sat)).setText("六");
         ((TextView) findViewById(R.id.ic_sun)).setText("日");
         rv_calender = findViewById(R.id.rv_calender);
+
+        inComeCalender.set(Calendar.YEAR,inComeCalender.get(Calendar.YEAR));
+        inComeCalender.set(Calendar.MONTH,inComeCalender.get(Calendar.MONTH));
+        inComeCalender.set(Calendar.DAY_OF_MONTH,inComeCalender.get(Calendar.DAY_OF_MONTH)+2);
 
         initListener();
         initData(0);
@@ -67,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void initListener() {
 
-        xIbeiCalenderAdapter = new XIbeiCalenderAdapter(Calendar.getInstance(),dataList);
+        xIbeiCalenderAdapter = new XIbeiCalenderAdapter(dataList);
         final GridLayoutManager gridLayoutManager = new GridLayoutManager(this,7);
         gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
@@ -91,38 +96,52 @@ public class MainActivity extends AppCompatActivity {
     //添加当月
     private void initLiocalMonth(int afterMonth) {
 
+
         //添加当月标题
-        dataList.add(new ItemBean(nowCalender, true, false, false));
+        dataList.add(new ItemBean(nowCalender, true, false, false,false));
 
         //判断第一天是周几 添加月首站位
         if (getMonthFirstDay(afterMonth) != 7) {
             for (int i = 0; i < getMonthFirstDay(afterMonth); i++) {
-                dataList.add(new ItemBean(null, false, false, false));
+
+                dataList.add(new ItemBean(null, false, false, false,false));
             }
         }
 
         //添加具体日期
         int maxDay = Calendar.getInstance().getActualMaximum(Calendar.DAY_OF_MONTH);
         for (int i = 0; i <maxDay ; i++) {
+            boolean isToday;
+            boolean isSelect;
             Calendar calendar = Calendar.getInstance();
             calendar.set(Calendar.DAY_OF_MONTH, i + 1);
 
             //是否是今天
             if (day == calendar.get(Calendar.DAY_OF_MONTH)) {
-                dataList.add(new ItemBean(calendar, false, true, true));
+                isToday = true;
             } else {
-                dataList.add(new ItemBean(calendar, false, false, false));
+                isToday = false;
             }
+
+            if (calendar.get(Calendar.YEAR)==inComeCalender.get(Calendar.YEAR)
+                    &&calendar.get(Calendar.MONTH)==inComeCalender.get(Calendar.MONTH)
+                    &&calendar.get(Calendar.DAY_OF_MONTH)==inComeCalender.get(Calendar.DAY_OF_MONTH)){
+                isSelect = true;
+            }else {
+                isSelect = false;
+            }
+            dataList.add(new ItemBean(calendar, false, isToday, isSelect,true));
+
         }
 
         //添加月尾站位
         if (getMonthLastDay(afterMonth) != 7) {
             for (int i = 0; i < 6 - getMonthLastDay(afterMonth); i++) {
-                dataList.add(new ItemBean(null, false, false, false));
+                dataList.add(new ItemBean(null, false, false, false,false));
             }
         } else {
             for (int i = 0; i < 6; i++) {
-                dataList.add(new ItemBean(null, false, false, false));
+                dataList.add(new ItemBean(null, false, false, false,false));
             }
         }
     }
@@ -145,12 +164,12 @@ public class MainActivity extends AppCompatActivity {
         Log.e("日历", "第一天" + firstDay + "最后一天" + lastDay);
 
         //添加当月标题
-        dataList.add(new ItemBean(nextCalender, true, false, false));
+        dataList.add(new ItemBean(nextCalender, true, false, false,false));
 
         //判断第一天是周几 添加月首站位
         if (firstDay != 7) {
             for (int i = 0; i < firstDay; i++) {
-                dataList.add(new ItemBean(null, false, false, false));
+                dataList.add(new ItemBean(null, false, false, false,false));
             }
 
         }
@@ -164,17 +183,17 @@ public class MainActivity extends AppCompatActivity {
             calender.set(Calendar.MONTH, month + afterMonth-1);
             calender.set(Calendar.DAY_OF_MONTH, i+1);
             Log.e("日历","被添加的i"+i);
-            dataList.add(new ItemBean(calender, false, false, false));
+            dataList.add(new ItemBean(calender, false, false, false,false));
         }
 
         //添加月尾站位
         if (lastDay != 7) {
             for (int i = 0; i < 6 - lastDay; i++) {
-                dataList.add(new ItemBean(null, false, false, false));
+                dataList.add(new ItemBean(null, false, false, false,false));
             }
         } else {
             for (int i = 0; i < 6; i++) {
-                dataList.add(new ItemBean(null, false, false, false));
+                dataList.add(new ItemBean(null, false, false, false,false));
             }
         }
 

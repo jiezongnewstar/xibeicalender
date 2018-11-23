@@ -4,7 +4,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import java.util.Calendar;
 import java.util.List;
 /**
  * 日历  recycleView  adapter
@@ -13,11 +12,9 @@ public class XIbeiCalenderAdapter extends RecyclerView.Adapter<RecyclerView.View
     public int TITLE = 1; //展示月份标题
     public int ITEM = 2;  //展示详细月份
 
-    private Calendar inComeCalender ; //传入参数
     private List<ItemBean> dataList;
 
-    public XIbeiCalenderAdapter(Calendar inComeCalender, List<ItemBean> dataList) {
-        this.inComeCalender = inComeCalender;
+    public XIbeiCalenderAdapter(List<ItemBean> dataList) {
         this.dataList = dataList;
     }
 
